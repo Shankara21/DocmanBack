@@ -5,5 +5,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", CategoryController.index);
+router.get("/:name", CategoryController.filterByName);
 
 module.exports = router;

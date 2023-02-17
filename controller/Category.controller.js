@@ -11,4 +11,17 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+  filterByName: async (req, res) => { 
+    try {
+      const category = await Category.findAll({
+        where: {
+          name: req.params.name,
+        },
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      res.status(200).json(category);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 };
