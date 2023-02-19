@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "*");
   next();
 });
-app.use(cors({ origin: "http://localhost:3001", credentials: true }));
+app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 
 app.use(logger("dev"));
