@@ -1,9 +1,14 @@
-var express = require('express');
+var express = require("express");
+const UserController = require("../controller/UserController");
 var router = express.Router();
+const { verifyToken } = require("../middleware/VerifyToken");
+const { refreshToken } = require("../controller/RefreshToken");
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get("/", verifyToken, UserController.getUsers);
+router.post("/register", UserController.register);
+router.post("/login", UserController.login);
+router.get("/refreshToken", refreshToken);
+router.delete("/logout", UserController.logOut);
 
 module.exports = router;

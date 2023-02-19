@@ -1,0 +1,11 @@
+GET http://localhost:3000/users 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJTaGFua2FyYTIxIiwiZnVsbG5hbWUiOiJNdWhhbW1hZCBMYXp1YXJkaSBUaW11ciIsImVtYWlsIjoibGF6dWFyZGl0MjIwMUBnbWFpbC5jb20iLCJ1c2VyTGV2ZWwiOiJ1c2VyIiwiaWF0IjoxNjc2NzMwMzU2LCJleHAiOjE2NzY3MzM5NTZ9.HZsVifjF3xlaHNLyzVdlk8iCU4ttOwuz6A9jTpwo5II
+
+###
+POST  http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email" : "lazuardit2201@gmail.com",
+    "password" : "123456"
+}
