@@ -1,11 +1,11 @@
 GET http://localhost:3000/users 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJTaGFua2FyYTIxIiwiZnVsbG5hbWUiOiJNdWhhbW1hZCBMYXp1YXJkaSBUaW11ciIsImVtYWlsIjoibGF6dWFyZGl0MjIwMUBnbWFpbC5jb20iLCJ1c2VyTGV2ZWwiOiJ1c2VyIiwiaWF0IjoxNjc2NzMwMzU2LCJleHAiOjE2NzY3MzM5NTZ9.HZsVifjF3xlaHNLyzVdlk8iCU4ttOwuz6A9jTpwo5II
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJTaGFua2FyYSIsImZ1bGxuYW1lIjoiTXVoYW1tYWQgTGF6dWFyZGkgVGltdXIiLCJlbWFpbCI6ImxhenVhcmRpdDIxQGdtYWlsLmNvbSIsInVzZXJMZXZlbCI6IlVzZXIiLCJpYXQiOjE2NzY4NjM1NjQsImV4cCI6MTY3Njk0OTk2NH0.gOcfjY_jJ04IiPJ0QcDIad8fQcysGRZ5QtZ4XLUR9kg
 
 ###
 POST  http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "email" : "lazuardit2201@gmail.com",
+    "email" : "lazuardit21@gmail.com",
     "password" : "123456"
 }

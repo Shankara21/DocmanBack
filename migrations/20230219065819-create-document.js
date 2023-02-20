@@ -19,10 +19,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       date: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
       },
       expDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
       },
       linkDoc: {
         type: Sequelize.STRING,
@@ -31,6 +31,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: "MstCategories",
+          key: "id",
+        },
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "MstUsers",
           key: "id",
         },
       },

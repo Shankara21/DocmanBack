@@ -8,7 +8,7 @@ const { refreshToken } = require("../controller/RefreshToken");
 router.get("/", verifyToken, UserController.getUsers);
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
-router.get("/refreshToken", refreshToken);
-router.delete("/logout", UserController.logOut);
+router.get("/refreshToken/:refreshToken", refreshToken);
+router.delete("/logout/:refreshToken", UserController.logOut);
 
 module.exports = router;

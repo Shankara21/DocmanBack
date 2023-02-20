@@ -97,7 +97,7 @@ module.exports = {
         },
         process.env.SECRET_KEY,
         {
-          expiresIn: "15s",
+          expiresIn: "1d",
         }
       );
       const refreshToken = jwt.sign(
@@ -120,14 +120,14 @@ module.exports = {
       });
       res.status(200).json({ token: token });
     } catch (error) {
-      res.status(500).json(error);
+      res.status(500).json(error.message);
     }
   },
   logOut: async (req, res) => {
     try {
       // res.clearCookie("refreshToken");
       // res.status(200).json({ message: "Logout success" });
-      const refreshToken = req.cookies.refreshToken;
+      const refreshToken = req.params.refreshToken;
       if (!refreshToken)
         return res.status(400).json({ message: "User not logged in" });
       const user = await User.findAll({
@@ -135,7 +135,8 @@ module.exports = {
           refreshToken,
         },
       });
-      if (!user[0]) return res.status(400).json({ message: "User not logged in" });
+      if (!user[0])
+        return res.status(400).json({ message: "User not logged in" });
       await User.update({ refreshToken: null }, { where: { id: user[0].id } });
       res.clearCookie("refreshToken");
       res.status(200).json({ message: "Logout success" });

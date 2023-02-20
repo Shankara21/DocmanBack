@@ -1,4 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
+  const Document = sequelize.define("MstDocuments", { timestamp: false });
   const User = sequelize.define(
     "User",
     {
@@ -40,5 +41,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "MstUsers",
     }
   );
+  User.hasMany(Document, { foreignKey: "userId" });
   return User;
 };
