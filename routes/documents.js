@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 /* GET home page. */
-router.get("/selectExp", DocumentController.selectExp);
+router.post("/selectExp", DocumentController.selectExp);
 router.get("/:id", DocumentController.index);
 router.post("/", upload.single("linkDoc"), DocumentController.create);
 router.post("/store", DocumentController.storeDocument);

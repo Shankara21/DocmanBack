@@ -95,6 +95,7 @@ module.exports = {
       const exp = await Document.findAll({
         where: {
           expDate: range,
+          userId: req.body.userId
         },
         attributes: {
           exclude: ["createdAt", "updatedAt", "categoryId", "userId"],
