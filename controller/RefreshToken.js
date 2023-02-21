@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   refreshToken: async (req, res) => {
     try {
-      const refreshToken = req.params.refreshToken;
+      const refreshToken = req.body.refreshToken;
       if (refreshToken == null)
         return res.status(401).json({ message: "Error 401" });
       // const user = await User.findOne({ where: { refreshToken } });

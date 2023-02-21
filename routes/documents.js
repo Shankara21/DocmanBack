@@ -16,8 +16,10 @@ const upload = multer({ storage: storage });
 /* GET home page. */
 router.post("/selectExp", DocumentController.selectExp);
 router.get("/:id", DocumentController.index);
+router.get("/show/:id", DocumentController.show);
 router.post("/", upload.single("linkDoc"), DocumentController.create);
 router.post("/store", DocumentController.storeDocument);
 router.get("/count/document", DocumentController.countDocument);
+router.delete("/:id", DocumentController.deleteDocument);
 
 module.exports = router;
