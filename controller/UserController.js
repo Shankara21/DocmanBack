@@ -144,4 +144,69 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+  showUser: async (req, res) => { 
+    try {
+      const user = await User.findOne({
+        where: {
+          id: req.params.id,
+        },
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "password", "refreshToken"],
+        },
+      });
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  updateUser: async (req, res) => { 
+    try {
+      const { username, fullname, email, userLevel } = req.body;
+      const user = await User.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+      const usernameExist = await User.findOne({ where: { username } });
+      if (usernameExist && usernameExist.id !== user.id) {
+        return res.status(400).json({ message: "Username already exists" });
+      }
+      const emailExist = await User.findOne({ where: { email } });
+      if (emailExist && emailExist.id !== user.id) {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+      const data = {
+        username,
+        fullname,
+        email,
+        userLevel,
+      };
+      await User.update(data, { where: { id: user.id } });
+      res.status(200).json({ message: "User updated" });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  deleteUser: async (req, res) => { 
+    try {
+      const user = await User.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+      await User.destroy({ where: { id: user.id } });
+      res.status(200).json({ message: "User deleted" });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 };

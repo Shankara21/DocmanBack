@@ -14,14 +14,14 @@ module.exports = {
           refreshToken: refreshToken,
         },
       });
-      if (!user[0]) return res.status(403).json({ message: "Tidak bisa" });
+      if (!user[0]) return res.status(403).json({ message: "user not found" });
 
       jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
         async (err, user) => {
           //   if (err) return res.sendStatus(403);
-          if (err) return res.status(403).json({ message: "Tidak bisa" });
+          if (err) return res.status(403).json({ message: "gagal verify" });
           const userFound = await User.findOne({
             where: { email: user.email },
           });

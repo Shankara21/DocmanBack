@@ -162,4 +162,37 @@ module.exports = {
       res.status(500).json(error.message);
     }
   },
+  updateDocument: async (req, res) => { 
+    try {
+      const document = await Document.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      const filePath = `public${document.linkDoc}`;
+      fs.unlinkSync(filePath);
+      const expDate = new Date(req.body.date);
+      expDate.setFullYear(expDate.getFullYear() + 4);
+      const updateDocument = await Document.update(
+        {
+          title: req.body.title,
+          noDoc: req.body.noDoc,
+          noRev: req.body.noRev,
+          date: req.body.date,
+          expDate: expDate.toISOString().split("T")[0],
+          categoryId: req.body.categoryId,
+          linkDoc: `/uploads/${req.file.filename}`,
+          userId: req.body.userId,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+      res.status(200).json(updateDocument);
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+  }
 };
