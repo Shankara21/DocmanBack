@@ -51,11 +51,7 @@ module.exports = {
     try {
       // expDate diperoleh dari date + 4 tahun
       const expDate = new Date(req.body.date);
-      // expDate.setFullYear(expDate.getFullYear() + 4);
-
-      // expdate diperoleh dari date + 1 bulan
-      // const expDate = new Date(req.body.date);
-      expDate.setMonth(expDate.getMonth() + 3);
+      expDate.setFullYear(expDate.getFullYear() + 3);
 
       const document = await Document.create({
         title: req.body.title,
@@ -66,24 +62,6 @@ module.exports = {
         categoryId: req.body.categoryId,
         linkDoc: `/uploads/${req.file.filename}`,
         userId: req.body.userId,
-      });
-      res.status(200).json(document);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-  storeDocument: async (req, res) => {
-    try {
-      const expDate = new Date(req.body.date);
-      expDate.setFullYear(expDate.getFullYear() + 4);
-      const document = await Document.create({
-        title: req.body.title,
-        noDoc: req.body.noDoc,
-        noRev: req.body.noRev,
-        date: req.body.date,
-        expDate: expDate.toISOString().split("T")[0],
-        categoryId: req.body.categoryId,
-        linkDoc: req.body.linkDoc,
       });
       res.status(200).json(document);
     } catch (error) {
@@ -115,10 +93,10 @@ module.exports = {
   selectExp: async (req, res) => {
     try {
       const range = moment().add(3, "months").format("YYYY-MM-DD");
+      // res.json(range);
       const exp = await Document.findAll({
         where: {
           expDate: range,
-          userId: req.body.userId,
         },
         attributes: {
           exclude: ["createdAt", "updatedAt", "categoryId", "userId"],
@@ -142,6 +120,7 @@ module.exports = {
           exclude: ["createdAt", "updatedAt", "password", "refreshToken"],
         },
       });
+
       res.status(200).json({ userFound, exp });
     } catch (error) {
       res.status(500).json(error.message);
@@ -162,7 +141,7 @@ module.exports = {
       res.status(500).json(error.message);
     }
   },
-  updateDocument: async (req, res) => { 
+  updateDocument: async (req, res) => {
     try {
       const document = await Document.findOne({
         where: {
@@ -194,5 +173,5 @@ module.exports = {
     } catch (error) {
       res.status(500).json(error.message);
     }
-  }
+  },
 };
