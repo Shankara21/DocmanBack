@@ -151,7 +151,7 @@ module.exports = {
       const filePath = `public${document.linkDoc}`;
       fs.unlinkSync(filePath);
       const expDate = new Date(req.body.date);
-      expDate.setFullYear(expDate.getFullYear() + 4);
+      expDate.setFullYear(expDate.getFullYear() + 3);
       const updateDocument = await Document.update(
         {
           title: req.body.title,
