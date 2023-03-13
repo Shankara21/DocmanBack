@@ -85,7 +85,12 @@ module.exports = {
           categoryId: 3,
         },
       });
-      res.status(200).json({ isp, wi, form });
+      const others = await Document.count({
+        where: {
+          categoryId: 4,
+        }
+      })
+      res.status(200).json({ isp, wi, form, others });
     } catch (error) {
       res.status(500).json(error);
     }
