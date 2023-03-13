@@ -121,7 +121,7 @@ module.exports = {
         },
       });
 
-      res.status(200).json({ userFound, exp });
+      res.status(200).json({ userFound, exp, range });
     } catch (error) {
       res.status(500).json(error.message);
     }
@@ -133,10 +133,12 @@ module.exports = {
           id: req.params.id,
         },
       });
-      const filePath = `public${document.linkDoc}`;
-      fs.unlinkSync(filePath);
+      const check = fs.existsSync(`public${document.linkDoc}`);
+      if (check) {
+        fs.unlinkSync(`public${document.linkDoc}`);
+      }
       await document.destroy();
-      res.status(200).json(filePath);
+      res.status(200).json({ message: "Document deleted" });
     } catch (error) {
       res.status(500).json(error.message);
     }
@@ -148,8 +150,10 @@ module.exports = {
           id: req.params.id,
         },
       });
-      const filePath = `public${document.linkDoc}`;
-      fs.unlinkSync(filePath);
+      const check = fs.existsSync(`public${document.linkDoc}`);
+      if (check) {
+        fs.unlinkSync(`public${document.linkDoc}`);
+      }
       const expDate = new Date(req.body.date);
       expDate.setFullYear(expDate.getFullYear() + 3);
       const updateDocument = await Document.update(

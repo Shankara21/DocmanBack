@@ -28,4 +28,11 @@ module.exports = {
     host: "127.0.0.1",
     dialect: "mysql",
   },
+  prod: {
+    username: "iot_prod",
+    password: "123456",
+    database: "docman",
+    host: "192.168.9.47",
+    dialect: "mysql",
+  },
 };
